@@ -51,19 +51,40 @@ public class PrimeNumberUtil {
         return true;
     }
 
+    List<Integer> findAllPrimeUsingSieve(int limit) {
+        List<Integer> primeList = new ArrayList<>();
+        boolean[] isPrime = new boolean[limit + 1];
+
+        for (int i = 2; i <= limit; i++) {
+
+            if (isPrime[i]) {
+                continue;
+            }
+            primeList.add(i);
+
+            for (int j = i * 2; j <= limit; j += i) {
+                isPrime[j] = true;
+            }
+        }
+        return primeList;
+    }
+
     public static void main(String[] args) {
         PrimeNumberUtil primeNumberUtil = new PrimeNumberUtil();
-//        System.out.println(primeNumberUtil.isPrime(1000));
-//        System.out.println(primeNumberUtil.isPrime(2));
-//        System.out.println(primeNumberUtil.isPrime(3));
-//        System.out.println(primeNumberUtil.isPrime(4));
-//        System.out.println(primeNumberUtil.isPrime(5));
-        
+        System.out.println(primeNumberUtil.isPrime(1000));
+        System.out.println(primeNumberUtil.isPrime(2));
+        System.out.println(primeNumberUtil.isPrime(3));
+        System.out.println(primeNumberUtil.isPrime(4));
+        System.out.println(primeNumberUtil.isPrime(5));
+
         System.out.println(primeNumberUtil.getPrimeFactors(1000));
         System.out.println(primeNumberUtil.getPrimeFactors(2));
         System.out.println(primeNumberUtil.getPrimeFactors(3));
         System.out.println(primeNumberUtil.getPrimeFactors(4));
         System.out.println(primeNumberUtil.getPrimeFactors(5));
         System.out.println(primeNumberUtil.getPrimeFactors(46));
+
+
+        System.out.println(primeNumberUtil.findAllPrimeUsingSieve(18));
     }
 }
